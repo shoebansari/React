@@ -1,0 +1,243 @@
+11-What is the purpose of render() in react.
+Each react component must have render() mandatorily. It returns a single react element which is representation of native DOM component.
+If more than one then must be grouped together inside a <div>,<group>,  or <form>.
+  
+12-What is Props?
+Props is shorthand for properties in React.They are read-only components which must be kept pure i.e immutable. They always pass down from parent
+to child component throughout the application. A child component can never send back prop to its parent component. This help maintaining the
+unidirection the data flow and are generally used to render the dynamically generated data.
+
+13-What is State?
+States are heart of the react component. States are source of the data must be kept as simple as possible. Basically States are the object
+which determine component rendering and behaviour.They are mutable unlike the props and creates dynamic and interactive component.
+They are accessed by this.state().
+
+14-Life cycle method of React.
+componentWillMount()->Executed just before rendering takes place on client as well as server side.
+componentDidMount()->Executed on the client side only after first render.
+componentWillReceiveProps()->Invoked as soon as the props are received from the parent class and before another render is called.
+shouldComponentUpdate()->Returns true as false value based on certain conditions.if you want your component to update, return true else return false.
+componentWillUpdate()->Called just before rendering takes place in The DOM.
+componentDidUpdate()->Called immediately after rendering takes place.
+componentWllUnmount()->Called after the component is unmounted from the DOM.used to clear up the memory.
+
+
+15-Higher Order Component(HOC)
+https://www.youtube.com/watch?v=VtSzJn41LgM
+higher order component is like same as higher order function
+It takes a component as a props and return a component.
+
+17-Pure component
+React.PureComponent is similar to React.Component. The difference between them is React.Component doesn't implement shouldComponentUpdate,
+but React.PureComponent implements it with a shallow  prop and state comparison.
+If React component's render() function renders the same result given the same props and state, you can use React.PureComponent for 
+a performance boosts.
+
+18-Lazy Loading
+splitting is used to split code by using lazy loading in react.
+https://www.youtube.com/watch?v=tV9gvls8IP8
+instead of loading all the data at same time better to load only relevent data. 
+When page is showing loading other peice of code already loaded that is known as lazy loading.
+
+import {lazy} from 'react'
+import myComp = lazy(()=> import('./component/myCom')) 
+
+render(
+  <div>Another component</div>
+  <suspense fallback={<div>..loading</div>}>
+    <myComp/>
+  </suspense>
+)
+
+When rendering it will show 
+AnotherComponent then ...loading then myComp.
+
+
+19-Tree Shaking
+Tree shaking is a process that bundlers like webpack and rollup go through to remove unused code.
+Tree shaking means that only components from our library used in the app are included in the app bundle. 
+If not tree shaken, all the components will be included even if they are not used. So, tree shaking reduces 
+the size of the app bundle and increases the app’s performance because less time is spent downloading,
+decompressing, parsing, and executing it.
+
+21-props drilling, context api, useContext
+https://www.youtube.com/watch?v=us4pQzWRznQ
+
+useContext hook makes it easy to pass data throughout your app without manually passing props down the tree.
+
+ContextAPI
+has 3 things to pass the data
+context 
+provided
+useContext
+
+import {createContext} from 'react'
+
+const BioData = createContext()
+
+return(
+    <BioData.Provider value={"shoeb"}>
+        <comB></comB>
+    </BioData.Provider>
+)
+
+export {BioData}
+
+Now BioData can be accessed from Any component
+
+In comB
+
+import {useContext} from 'react'
+import {BioData} from './ComA'
+
+const context = useContext(BioData)
+
+console.log(context)  //output shoeb
+
+22-CLIENT SIDE RENDERING(CSR) AND SERVER SIDE RENDERING(SSR)
+
+CSR- websites are loaded 3 files from server HTML,CSS,JAVASCRIPT file
+all are send seprately to the browser, 1st HTML file then Css file and javascript file takes time to load on browser
+depends upon the size of javascript file. like reactjs and vue js.
+
+SSR-before sending all three file it, server prerenders it on the server with all HTML,CSS,Javascript data inside 
+full flidged html documents to desplay the website. example next.js 
+
+React works in both the way client side as well server side but bydefault it works as client side rendering
+
+For server side rendering it needs few changes like
+use Hydrate instead of render in index file
+
+
+23-Explain Strict Mode in React.
+Strict mode is tool for highlighting potential problem(like depricated lifecycle method, or legacy classes) in an application,
+shows warning to those in console
+depricated methods like
+componentWillMount->UNSAFE_componentWillMount,
+componentWillReceiveProps->UNSAFE_componentWillReceiveProps,
+componentWillUpdate->UNSAFE_componentWillUpdate,
+It is used in index.js file as below
+
+ReactDOM.render(
+<React.StrictMode>
+  <App/>
+</React.StrictMode>
+)
+
+25- What are the different ways to style a React component?
+1-inline->use camelcase if 2 words like in html page background-color but in react backgroundColor
+<!-- <h1 style={{color:"red", backgroundColor:"green"}}>SHOEB</h1> -->
+2-use const for style.
+
+const style = {
+  color:'red',
+  backgroundColor:'blue'
+}
+<!-- <h1 style={style}>SHOEB</h1> -->
+
+3-using in index.css file
+then import that file to reflect.
+
+27-What are events or synthetic events in React?
+in react events are same as the html events, onclick(HTML) and onClick(React) are same 
+but react events are wrapped with the cross-browser wrapper so that on diffrent browser events could be handled.
+
+Other words
+Synthetic events are the objects which act as a cross-browser wrapper around the browser’s native event.
+It's API is same as the browser's native event, including stopPropagation()and preventDefault() except the events work 
+identically across all browsers.
+They combine the behavior of different browsers into one API. This is done to make sure that the events show consistent properties
+across different browsers.
+
+28-What is Lifting State Up in React?
+To pass state from one component to another component as a prop is knwon as lifting state up.
+
+29-What are stateless and stateful components?
+In React, a stateful component is a component that holds some state. Stateless components, by contrast, have no state.
+Note that both types of components can use props
+
+
+31-Can you force a component to re-render without calling setState?
+In class components, you can call this.forceUpdate() to force a rerender
+in functional component, Using react hooks, you can now call useState() in your function component.
+
+31-How can you embed two or more components into one?
+React allows us to render one component inside another component. It means, we can create the parent-child relationship between
+the 2 or more component
+
+32-What is an event in React?
+React events are named using camelCase, rather than lowercase.
+With JSX you pass a function as the event handler, rather than a string.
+
+In HTML
+
+<button onclick="activateLasers()">
+  Activate Lasers
+</button>
+
+In React 
+
+<button onClick={activateLasers}>
+  Activate Lasers
+</button>
+
+
+Another difference is that you cannot return false to prevent default behavior in React. You must call preventDefault explicitly.
+For example, with plain HTML, to prevent the default form behavior of submitting, you can write:
+In HTML
+
+<form onsubmit="console.log('You clicked submit.'); return false">
+  <button type="submit">Submit</button>
+</form>
+
+In React, this could instead be
+
+function Form() {
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log('You clicked submit.');
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+Here, e is a synthetic event. React defines these synthetic events according to the W3C spec, so you don’t need to worry about 
+cross-browser compatibility. React events do not work exactly the same as native events.
+
+When using React, you generally don’t need to call addEventListener to add listeners to a DOM element after it is created. 
+Instead, just provide a listener when the element is initially rendered.
+
+33- How do you modularize code in React?
+React code can easily be modularized by using the component structure. The approach is to define each component into different 
+files. With each component separated into different files, all we have to do is figure out how to access the code defined in 
+one file within another file. To access one file into another file, React provide the functionality to import and export the 
+files.
+
+34-What is the significance of keys in React?
+A “key” is a special string attribute you need to include when creating lists of elements in React. Keys are used to React 
+to identify which items in the list are changed, updated, or deleted. In other words, we can say that keys are used to give an 
+identity to the elements in the lists.
+https://www.youtube.com/watch?v=rpdhFx9bnW8
+
+35-createEntityAdapter
+Simplifies the management of a normalized state of entities, providing efficient methods and 
+selectors for manipulating the data.
+
+36-Web Vitals (https://www.youtube.com/watch?v=YAXfn50jEAw)
+It is used to improve the performance of appication(It is automated generated and added in src folder and used in index.js file)
+
+getCLS->Cumulative layout shift(CLS)-During the page load some elements moves from left to right or bottom to top or any direction
+that measures time for moving elements
+
+getFID->(First Input Delay), How much time it takes after any clicke.
+
+getLCP->(Largest Contentful Paint), 2.5 sec 75%, means 75% of page should load within 2.5 sec, else web site is taking more time than expectation.
+
+getTTFB(time to first byte)->server respond to a request with the first byte of html
+
+All can be seen by using reportWebVitals(console.log); will show the result in browser's consolex
+
+https://www.youtube.com/watch?v=nrIAVhs3PmQ

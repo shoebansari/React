@@ -1,0 +1,82 @@
+
+//Redux is a predictable state container for javascript app.As the application grows, it become difficult to keep it organized
+and  maintain data flow. Redux solve the problem by managing the application's state with the single global object called store.
+
+Principles of redux.
+
+1-Single source of truth
+The state of your whole application is stored in a object tree within a single store.
+
+2-State is read only
+The only way to change the state is to emit the action, an object describing what happened. this means nobody can directly change
+the state of your application.
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Redux installation 
+1-npm install --save redux
+2-npm install --save react-redux
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Lets learn about how redux works.
+
+Lets assumes our application's state is described by a plain object called initialState which is as follows
+
+const initialState={
+  isLoading:false,
+  item:[],
+  hasError:false,
+}
+
+Every piece of the code in your application cannot change this state.To change the state you need to dispatch the action.
+
+What is action now?
+
+An action is a plain object that describe the intention to cause the change with a type property.It must have a type 
+property which tells what type of action is being performed.The command for action is as follows
+
+return {
+  type:'ITEM_REQUEST' //type
+  isLoading:true      //payload
+}
+
+
+What is Reducer?
+
+Action and state are held togther by a function called reducers.An action is dispathed with an intention to cause the change.
+This change is performed by the reducer.Reducer is only way to change the state in redux, making it more predictable, centralised
+and debuggable.
+
+const reducer = (state=initialState, action)=>{
+  switch(action.type) {
+    case 'ITEM_REQUEST':
+      return Object.assign({}, state, {isLoading;action.isLoading})
+    default:
+      return state
+  }
+}
+
+Redux has single store which holds the application state.if you want to split your code on the basis of data handling logic,
+you should start spliting your reducers instead of store in Redux.
+
+What is Store?
+
+Store is immutable object tree in Redux.A store is state container Which holds the application's state. Redux can only have single
+store in your application.Whenever store is created in redux, your need to specify the reducers.Here is how we create store
+
+import { createStore } from 'redux'
+import reducer from './reducers/reducer'
+const store = createStore(reducer);
+
+getState()
+It helps you retrieve the current state of your Redux store
+store.getState();
+
+What is differences between Redux Thunk and Redux Saga?
+Both Redux Thunk and Redux Saga take care of dealing with side effects. In very simple terms, applied to the most 
+common scenario (async functions, specifically AJAX calls) Thunk allows Promises" to deal with them, Saga uses Generators. 
+Thunk is simple to use and Promises are familiar to many developers, Saga/Generators are more powerful but you will need
+to learn them. When Promises are just good enough, so is Thunk, when you deal with more complex cases on a regular basis, 
+Saga gives you better tools.
+
+
+https://www.youtube.com/watch?v=UX6Kf48qCvs

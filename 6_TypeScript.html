@@ -1,0 +1,65 @@
+https://www.interviewbit.com/typescript-interview-questions/
+
+1-What is TypeScript?
+Typescript is open-source language developed by Anders Hejlberg at Microsoft.It is superset of javascript that compiles to 
+plain javascript. it run on any browser, operating system, that means all valid javascript code is also typescript code.
+It offers advance feature such as Intellisense, code compilation, safe refactoring etc.
+
+JavaScript is a loosely typed language. It can be difficult to understand what types of data are being passed around in JavaScript.
+In JavaScript, function parameters and variables don't have any information! So developers need to look at documentation, or guess based 
+on the implementation.
+
+TypeScript allows specifying the types of data being passed around within the code, and has the ability to report errors when the types 
+don't match
+
+2- What are the primitive types in TypeScript?
+Three primitive types in typescript
+string, number, boolean
+
+3-What is any type and when to use it
+when you are not sure about type of data like data coming from API could be store in any type.
+
+4-What is void and when to use void type.
+The void indicates the absence of type on variable.It acts as opposite type to any. it is especially useful in functiona that does not 
+return a value.
+
+function notify(): void {
+  alert("The user has been notified.");
+}
+
+5-Provide the syntex of a function with the type annotations.
+
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+
+6- how to create object in TypeScript?
+
+
+const pt:{x:number,y:number}={
+  x:10,
+  y:20
+}
+
+or Define interface with opetional property
+
+interface IPt = {
+  x?:number,
+  y?:number
+}
+
+const pt:Ipt={
+  x:10,
+  y:20
+}
+
+
+7-what is purpose of tsconfig.json file ?
+(npx tsc --init )
+A tsconfig file in a directly marks that directly as root of typescript project.
+It provides compiler option to compile the project.
+
+8-Explain the various ways to control member visibility in TypeScript.
+public: you can access public member anywhere outside of the class, all classes are public by-default,
+protected: A protected member is visible only to the subclasses of the class containiing that member, 
+private: A private member only visible inside the class.

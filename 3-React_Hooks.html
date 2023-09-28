@@ -1,0 +1,98 @@
+1-React Hooks
+Hooks allows function components to have access to state and other react features.Beacause of this, Class
+components are generally no longer needed.
+
+2-Hook Rules
+Hooks can only be called inside React function component.
+Hooks can only be called at the top level of the component.
+Hooks can not be conditional.
+Hooks will not work on class component.
+
+3-Custom Hooks
+If you have stateful logic that needs to be reused in sevral component, you can build your own component.
+
+4-useState
+useState allows us to track state in functional component.
+useState accepts an initial state and returns 2 values, current state and the function that updates the state.
+
+import {useState} = 'react'
+const [test, setTest] = useState('');
+
+5-useEffect
+It allows us to perform side effects in your component.
+Side effects like fetching data, directly updating the DOM, and timers. 
+useEffect accepts 2 aurguments.The second aurgument is option.
+useEffect(<function>,<dependency>)
+Rules
+5.1-If no dependency passed
+useEffect(()=>{
+  //Runs on every render
+})
+
+5.2-An Empity Array
+useEffect(()=>{
+//Runs only on the first render.
+},[])
+
+5.3-Props or State value
+useEffect(()=>{
+//Runs on first render
+//And any time any dependency value changes.
+},[prop, state])
+
+6-useContext
+React context is a way to manage state globally.
+
+7-useRef
+youtube.com/watch?v=86EkZzXyScQ
+
+When DOM manipulation required then we use useRef
+like on textbox direct change on DOM Focus, color, value etc handled by useRef.
+
+let inputRef = useRef(null)
+<input type="text" ref={inputRef}>
+onButton Click 
+inputRef.currect.value = "1000";
+inputRef.current.focus();
+
+8-useReducer
+https://www.youtube.com/watch?v=VdXGIEYZuCw
+It is similar to useState hook.
+The useReducer accepts 2 aurguments.
+useReducer(<reducer function>,<initialState>)
+reducer fucntion contains custome state logic and initial state can be simple value but generally will contain an object.
+The useReducer hook returns the current state and a dispatch method.
+
+Example
+
+const reducer=(state, action)=>{
+  if(action.type==='increament'){
+    return state+1
+  }
+  if(action.type==='decreament'){
+    return state-1
+  }
+}
+
+const [state, dispatch] = useReducer(reducer, initialState)
+
+<p>{state}</p>
+<button onClick={()=>dispatch({type:'increament'})}>INC</button>
+<button onclick={()=>dispatch({type:'decreament'})}>DEC</button>
+
+9-useCallback
+It returns a memoized callback function.
+memoization means caching a value so that it does not need to be recalulated.
+useCallback hook only runs when one of its dependecy updates.this can improve performance.
+useCallback is to prevent a component from re-rendering unless its props have changed. 
+
+const handleClick=()=>{
+  return '';
+}
+
+const memoizedCallbackFunction = useCallBack(hadleClick,[]);
+
+10-useMemo
+useCallback and useMemo both are similar.useMemo returns the momoize value while useCallback returns a memoized function.
+const random =useMemo(()=>Math.random().toFixed(2),[]);
+<h1>{random}</h1>
