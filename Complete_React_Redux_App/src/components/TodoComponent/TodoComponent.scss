@@ -1,0 +1,29 @@
+.todoContainer {
+  width: 30%;
+  float: left;
+  border: 1px solid black;
+  &-top{
+    width: 100%;
+    float: left;
+    &-txt{
+      width: 50%;
+      float: left;
+    }
+  }
+  &-marginleft{
+    margin-left: 10px;
+  }
+  &-margintop {
+    margin-top: 80px;
+  }
+  &-list{
+    float: left;
+    width: 100%;
+    border: 1px solid black;
+    &-divided{
+      float: left;
+      width: 50%;
+      border-right: 1px solid black;
+    }
+  }
+}
